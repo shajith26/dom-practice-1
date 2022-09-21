@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,6 +9,7 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/script.js">
 </head>
+
 <body>
     <div>
         <label for="">operation</label>
@@ -32,45 +34,103 @@
     <div>
         <button id="start">start</button>
     </div>
+    <div class="problems">
+        <div class="problem">
+            <h3>7</h3>
+            <h3>+</h3>
+            <h3>5</h3>
+            <hr>
+            <input type="text" class="answer">
+            <hr>
+        </div>
+    </div>
 
-<script>
-    var startele=document.getElementById('start')
+    <script>
+        var startele = document.getElementById('start'),
+            problemsele = document.getElementsByClassName('problems')[0];
 
-    function generaterandomnumber(max){
-        let sha=parseInt(Math.random()*max);
-        console.log(sha)
-    }
+            function texttosymbol(text){
+                switch(text){
+                    case 'add': return '+';
+                    break;
+                    case 'sub': return '-';
+                    break;
+                    case 'multiply':return '*';
+                    break;
+                    default:return'/';
+                    break;
+                }
+            }
 
 
-    var operations1= function(){
-        var operationele=document.getElementById('operation'),
-        rangeele=document.getElementById('range'),
-        operation=operationele.value,
-        range=parseInt(rangeele.value),
-        randomnumber1,
-        randomnumber2;
-        console.log(typeof(range))
-        
+        function generaterandomnumber(max) {
+            return parseInt(Math.random() * max);
         }
 
-    // create 16 problems
-    if(operation!=='divide'){
-        for(let i=1;i<=16;i++){
-            // random number 1
-            randomnumber1=generaterandomnumber(range);
-            // random number 2
-            randomnumber2=generaterandomnumber(range);
 
-            console.log(randomnumber1,randomnumber2)
+        function updateproblem(number1,number2, operation) {
+            // create problem div
+            let problemele=document.createElement('div');
+            problemele.setAttribute('class','problem');
+            // create h3 for number1
+            let number1ele=document.createElement('h3');
+            // update value for number1
+            number1ele.innerText=number1;
+            // create h3 for operation
+            let operationele=document.createElement('h3')
+            // update symbol for operation
+            let opreationele.innerText=texttosymbol(operation);
+            // create h3 for number 2 
+            let number2ele=document.createElement('h3');
+            // update value for number2
+            number1ele.innerText=number2;
+            // create hr
+            // create input 
+            let inputele=document.createElement('input');
+            // update input class
+            inputele.setAttribute('class','answer');
+            // update input type
+            inputele.setAttribute('type','text');
+            // append h3,hr,input inside the problem
+            problemele.append(number1ele);
+            problemele.append(operationele);
+            problemele.append(number2ele);
+            problemele.append(inputele);
+            // append inside problem
+            problemsele.append(problemele)
+
         }
-    }
 
 
-    startele.addEventListener('click',operations1)
+        var operations1 = function () {
+            var operationele = document.getElementById('operation'),
+                rangeele = document.getElementById('range'),
+                operation = operationele.value,
+                range = parseInt(rangeele.value),
+                randomnumber1,
+                randomnumber2;
 
 
 
-</script>
+            // create 16 problems
+            if (operation !== 'divide') {
+                for (let i = 1; i <= 16; i++) {
+                    // random number 1
+                    randomnumber1 = generaterandomnumber(range);
+                    // random number 2
+                    randomnumber2 = generaterandomnumber(range);
+
+                    updateproblem(randomnumber1, randomnumber2, operation)
+                }
+            }
+        }
+
+        startele.addEventListener('click', operations1)
+
+
+
+    </script>
 
 </body>
+
 </html>
