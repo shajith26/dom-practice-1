@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/script.js">
+</head>
+<body>
+    <div>
+        <label for="">operation</label>
+        <select name="" id="operation">
+            <option value="add">addition</option>
+            <option value="sub">subtraction</option>
+            <option value="multi">multiplication</option>
+            <option value="divide">division</option>
+        </select>
+    </div>
+    <div>
+        <label for="">range</label>
+        <select name="" id="range">
+            <option value="9">1-9</option>
+            <option value="19">1-19</option>
+            <option value="29">1-29</option>
+            <option value="39">1-39</option>
+            <option value="49">1-49</option>
+            <option value="99">1-99</option>
+        </select>
+    </div>
+    <div>
+        <button id="start">start</button>
+    </div>
+
+<script>
+    var startele=document.getElementById('start')
+
+    function generaterandomnumber(max){
+        let sha=parseInt(Math.random()*max);
+        console.log(sha)
+    }
+
+
+    var operations1= function(){
+        var operationele=document.getElementById('operation'),
+        rangeele=document.getElementById('range'),
+        operation=operationele.value,
+        range=parseInt(rangeele.value),
+        randomnumber1,
+        randomnumber2;
+        console.log(typeof(range))
+        
+        }
+
+    // create 16 problems
+    if(operation!=='divide'){
+        for(let i=1;i<=16;i++){
+            // random number 1
+            randomnumber1=generaterandomnumber(range);
+            // random number 2
+            randomnumber2=generaterandomnumber(range);
+
+            console.log(randomnumber1,randomnumber2)
+        }
+    }
+
+
+    startele.addEventListener('click',operations1)
+
+
+
+</script>
+
+</body>
+</html>
