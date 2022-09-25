@@ -35,14 +35,7 @@
         <button id="start">start</button>
     </div>
     <div class="problems">
-        <div class="problem">
-            <h3>7</h3>
-            <h3>+</h3>
-            <h3>5</h3>
-            <hr>
-            <input type="text" class="answer">
-            <hr>
-        </div>
+
     </div>
 
     <script>
@@ -62,7 +55,7 @@
                 }
             }
 
-
+           
         function generaterandomnumber(max) {
             return parseInt(Math.random() * max);
         }
@@ -85,6 +78,10 @@
             // update value for number2
             number2ele.innerText=number2;
             // create hr
+            hr=document.createElement('hr')
+            // update hr
+
+            
             // create input 
             let inputele=document.createElement('input');
             // update input class
@@ -95,12 +92,17 @@
             problemele.append(number1ele);
             problemele.append(operationele);
             problemele.append(number2ele);
+            problemele.append(hr);
             problemele.append(inputele);
+            // problemele.append(hr);
             // append inside problem
             problemsele.append(problemele)
 
         }
 
+        function resetproblem(){
+            problemsele.innerHtml='';
+        }
 
         var operations1 = function () {
             var operationele = document.getElementById('operation'),
@@ -114,15 +116,23 @@
 
             // create 16 problems
             if (operation !== 'divide') {
+
+                resetproblem();
+
                 for (let i = 1; i <= 16; i++) {
                     // random number 1
                     randomnumber1 = generaterandomnumber(range);
                     // random number 2
                     randomnumber2 = generaterandomnumber(range);
 
+                   
+
                     updateproblem(randomnumber1, randomnumber2, operation)
                 }
             }
+
+            
+
         }
 
         startele.addEventListener('click', operations1)

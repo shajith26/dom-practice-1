@@ -2,5 +2,6 @@
     width: 200px;
     height: 200px;
     padding: 10px;
-    border: solid 1px;
+    border-radius: 7px;
+    border: solid 3px darkblue;
 }
