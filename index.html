@@ -32,15 +32,20 @@
         </select>
     </div>
     <div>
-        <button id="start">start</button>
+        <button id="start">Start</button>
+        <button id="calculate" >Calculate</button>
     </div>
     <div class="problems">
 
     </div>
-
     <script>
         var startele = document.getElementById('start'),
-            problemsele = document.getElementsByClassName('problems')[0];
+            problemsele = document.getElementsByClassName('problems')[0],
+            calculateEle = document.getElementById('calculate');
+
+            function generaterandomnumber(max) {
+            return parseInt(Math.random() * max);
+        }
 
             function texttosymbol(text){
                 switch(text){
@@ -55,11 +60,13 @@
                 }
             }
 
-           
-        function generaterandomnumber(max) {
-            return parseInt(Math.random() * max);
+            function resetProblems(){
+            problemsele.innerHTML = "";
         }
+           
+        
 
+        
 
         function updateproblem(number1,number2, operation) {
             // create problem div
@@ -67,18 +74,22 @@
             problemele.setAttribute('class','problem');
             // create h3 for number1
             let number1ele=document.createElement('h3');
+            number1ele.setAttribute('class','number1');
             // update value for number1
             number1ele.innerText=number1;
             // create h3 for operation
-            let operationele=document.createElement('h3')
+            let operationele=document.createElement('h3');
+            operationele.setAttribute('class','operation');
             // update symbol for operation
              operationele.innerText=texttosymbol(operation);
             // create h3 for number 2 
             let number2ele=document.createElement('h3');
+            number2ele.setAttribute('class','number2');
             // update value for number2
             number2ele.innerText=number2;
             // create hr
-            hr=document.createElement('hr')
+            let hr=document.createElement('hr');
+            let hr1=document.createElement('hr');
             // update hr
 
             
@@ -94,15 +105,14 @@
             problemele.append(number2ele);
             problemele.append(hr);
             problemele.append(inputele);
+            problemele.append(hr1);
             // problemele.append(hr);
             // append inside problem
             problemsele.append(problemele)
 
         }
 
-        function resetproblem(){
-            problemsele.innerHtml='';
-        }
+        
 
         var operations1 = function () {
             var operationele = document.getElementById('operation'),
@@ -117,15 +127,13 @@
             // create 16 problems
             if (operation !== 'divide') {
 
-                resetproblem();
+                resetProblems();
 
                 for (let i = 1; i <= 16; i++) {
                     // random number 1
                     randomnumber1 = generaterandomnumber(range);
                     // random number 2
                     randomnumber2 = generaterandomnumber(range);
-
-                   
 
                     updateproblem(randomnumber1, randomnumber2, operation)
                 }
@@ -135,8 +143,48 @@
 
         }
 
-        startele.addEventListener('click', operations1)
+        function operation2(){
+            var problemElements=document.getElementsByClassName("problem"),
+            problemele,operationele,operationtype,number1value,number2ele,number2value,expectedanswer,operationtype,actualanswerele,actualanswer;
+            for(let i=0;i<problemElements.length;i++){
+                problemele=(problemElements[i])
 
+                // find operation
+                operationele=problemele.getElementsByClassName('operation')[0];
+                operationtype=operationele.innerText;
+
+                //get number1
+                number1ele=problemele.getElementsByClassName('number1')[0];
+                number1value=parseInt(number1ele.innerText);
+                // console.log(number1value);
+
+                //get number2
+                number2ele=problemele.getElementsByClassName('number2')[0];
+                number2value=parseInt(number2ele.innerText);
+                // console.log(number2value);
+
+                // find expected answer
+                if(operationtype == '+'){
+                    expectedanswer = number1value+number2value;
+                }else if(operationtype == '-'){
+                    expectedanswer = number1value+number2value;
+                }else if(operationtype == '*'){
+                    expectedanswer = number1value+number2value;
+                }else{
+                    expectedanswer = number1value / number2value
+                }
+                console.log(expectedanswer)
+
+                //get actual answer
+                actualanswerele = getElementsByClassName('answer')[0];
+                actualanswer = actualanswerel.value;
+                console.log(actualanswer);
+
+            }
+        }
+
+        startele.addEventListener('click', operations1)
+        calculateEle.addEventListener('click', operation2)
 
 
     </script>
